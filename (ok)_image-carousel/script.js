@@ -1,0 +1,44 @@
+// VARIABLES
+const imgContainer = document.querySelector('#imgs');
+const leftBtn = document.querySelector('#left');
+const rightBtn = document.querySelector('#right');
+const img = document.querySelectorAll('#imgs img');
+console.log(imgContainer)
+
+let idx = 0;
+let interval = setInterval(run, 3000);
+
+// FUNCTIONS
+function run() {
+  idx++;
+  changeImage();
+}
+
+function changeImage() {
+  if (idx > img.length - 1) {
+    idx = 0;
+  } else if (idx < 0) {
+    idx = img.length - 1;
+  }
+
+  imgContainer.style.transform = `translateX(-${idx * 500}px)`;
+}
+
+function resetInterval() {
+  clearInterval(interval);
+  interval = setInterval(run, 3000);
+}
+
+// EVENT LISTENERS
+rightBtn.addEventListener('click', () => {
+  idx++;
+  changeImage();
+  resetInterval();
+});
+
+leftBtn.addEventListener('click', () => {
+  idx--;
+  changeImage();
+  resetInterval();
+})
+
